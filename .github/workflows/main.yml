@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Reclaim cache directory
+        run: chown -R 1001:1001 /github/home/.cache && echo "pwn dat cache"
       - name: Chrome
         uses: cypress-io/github-action@v6
         timeout-minutes: 10
