@@ -13,13 +13,13 @@ describe('Formulaire de contact', () => {
       userData = data[0];
     });
   })
-  
+
   beforeEach(() => {
-    cy.visit('https://testqa.purse.tech/fake-contact');
+    cy.visit('/fake-contact');
   })
 
   context("Cas passant - Renseigner tous les champs", () => {
-    it.only('Valider le formulaire avec les bonnes informations', () => {
+    it('Valider le formulaire avec les bonnes informations', () => {
       //instancier la classe contacForm pour accéder aux méthodes créées
       const formObj = new contactForm();
       //créer une variable et y stocker la valeur en fonction du titre récupéré
@@ -71,8 +71,21 @@ describe('Formulaire de contact', () => {
       formObj.clickSubmit().click();
       formObj.successTxt().should('have.text', 'Le message a été envoyé.'); //vérifier si le message success est affiché
     })
+
     it('Valider le formulaire sans renseigner le message ', () => {
-      //
+      //instancier la classe contacForm pour accéder aux méthodes créées
+      const formObj = new contactForm();
+      //créer une variable et y stocker la valeur en fonction du titre récupéré
+      let genre = userData.owner.title == 'ms' ? 'Femme' : 'Homme'
+      formObj.enterGenre().select(genre)
+      formObj.enterPrenom()
+      formObj.enterNom()
+      formObj.enterSociete()
+      formObj.enterPhone()
+      formObj.enterTitleMessage() 
+      formObj.enterMessage() 
+      formObj.clickSubmit().click();
+      formObj.successTxt().should('not.have.text', 'Le message a été envoyé.'); //vérifier si le message success est affiché
     })
 
   })
