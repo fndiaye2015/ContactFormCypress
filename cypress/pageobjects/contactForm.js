@@ -1,4 +1,6 @@
-//class contactForm avec les méthodes contenant tous les éléments du formulaire
+/**
+ * class contactForm avec les méthodes contenant tous les éléments du formulaire
+ */
 class contactForm {
 
     enterGenre() {
