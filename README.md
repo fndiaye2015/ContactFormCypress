@@ -21,6 +21,6 @@ Pour une version MVP. On doit s'assurer que ces cas ci-dessous sont pris en comp
 - *Nom cas de test:* Le champs numéro de téléphone ne doit pas contenir de lettre
 - *Résultat attendu:* Un message d'erreur est affiché
 
-3. 
+4. 
 - *Nom cas de test:* ETQ utilisateur cliquer sur le boutton envoyer sans renseigner aucun champs
 - *Résultat attendu:* Un message d'erreur est affiché
