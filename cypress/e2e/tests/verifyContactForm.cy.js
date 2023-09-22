@@ -1,3 +1,4 @@
+
 //import de la class contactForm contenant les locators 
 import contactForm from '../../pageobjects/contactForm'
 
@@ -6,13 +7,14 @@ import apiService from '../../restAPI/apiService'
 
 describe('Formulaire de contact', () => {
   let userData
-  before(function () {
+  before(() => {
     apiService.getUserData().then((data) => {
       // Stockez les données du premier utilisateur dans la variable globale
       userData = data[0];
     });
   })
-  beforeEach(function () {
+  
+  beforeEach(() => {
     cy.visit('https://testqa.purse.tech/fake-contact');
   })
 
@@ -26,20 +28,17 @@ describe('Formulaire de contact', () => {
       formObj.enterPrenom().type(userData.owner.firstName).should('contain.value', userData.owner.firstName) //vérifier si le prénom récupéré a bien été saisi
       formObj.enterNom().type(userData.owner.lastName).should('contain.value', userData.owner.lastName)  //vérifier si le nom récupéré a bien été saisi
       formObj.enterSociete().type("agiltoo").should('contain.value', "agiltoo")   //saisir et vérifier si la champ société a été renseigné
-      formObj.enterPhone().type('07101010010').should('contain.value', '07101010010')   //saisir et vérifier si la champ téléphone a été renseigné
+      formObj.enterPhone().type('07101010010').should('contain.value', '07101010010')   //saisir et vérifier si la champ téléphone a été correctement renseigné 
       formObj.enterTitleMessage().type('Hello').should('contain.value', 'Hello')      //saisir et vérifier si la Titre message société a été renseigné
       formObj.enterMessage().type(userData.text).should('contain.value', userData.text) //vérifier si le message récupéré a bien été saisi
-      formObj.enterMessage().type(userData.text).should(
-        'not.have.css',
-        '-webkit-text-fill-color',
-        'rgb(208, 25, 71)'
-      ) //vérifier si le message récupéré a bien été saisi
       formObj.clickSubmit().click();
-      formObj.successTxt().should('have.text', 'Le message a été envoyé.'); //vérifier si le message success est affiché
+      formObj.successTxt().should('have.text', 'Le message a été envoyé.') 
+        .and('have.css', 'color', 'rgb(0, 119, 0)') //vérifier si le message success est affiché avec la bonne couleur
     })
   })
 
   context("Cas non passant", () => {
+
     it('Valider le formulaire sans renseigner le prenom ou le nom ', () => {
       const formObj = new contactForm();
       let genre = userData.owner.title == 'ms' ? 'Femme' : 'Homme'
