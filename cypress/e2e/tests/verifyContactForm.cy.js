@@ -72,7 +72,7 @@ describe('Formulaire de contact', () => {
       formObj.successTxt().should('have.text', 'Le message a été envoyé.'); //vérifier si le message success est affiché
     })
 
-    it('Valider le formulaire sans renseigner les champs obligatoires', () => {
+    it('Valider le formulaire en mettant des espaces sur les champs obligatoires', () => {
       //instancier la classe contacForm pour accéder aux méthodes créées
       const formObj = new contactForm();
       //créer une variable et y stocker la valeur en fonction du titre récupéré
